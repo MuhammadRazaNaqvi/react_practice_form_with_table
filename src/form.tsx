@@ -1,6 +1,5 @@
 import Form from 'react-bootstrap/Form';
 import { Button,Row,Table } from "react-bootstrap";
-import './students.js';
 function FormGroupExample() {
 
   const students = [
