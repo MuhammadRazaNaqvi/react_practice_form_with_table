@@ -3,6 +3,7 @@ import { Button, Row, Table } from "react-bootstrap";
 import { useState } from "react";
 function FormGroupExample() {
 
+  
   const [firstNamei , setFirstName] = useState('');
   const [lastNamei , setLastName] = useState('');
   const [agei , setAge] = useState('');
@@ -35,42 +36,56 @@ function FormGroupExample() {
     city: "Islamabad",
   },
   ]);
-const student1 = {
-  id: 4,
-  firstName: "Ghamees",
-  lastName: "Mohsin",
-  age: "24",
-  class: "2",
-  city: "Lahore",
-};
-const student2 = {
-  id: 5,
-  firstName: "Muhammad",
-  lastName: "Raza",
-  age: "24",
-  class: "3",
-  city: "Islamabad",
-};
-  students.unshift(student1);
-  students.push(student2);
-   const idi =14;
-    const handleSubmit=(event: PointerEvent)=>{
+  console.log("before", students)
+// const student1 = {
+//   id: 4,
+//   firstName: "Ghamees",
+//   lastName: "Mohsin",
+//   age: "24",
+//   class: "2",
+//   city: "Lahore",
+// };
+// const student2 = {
+//   id: 5,
+//   firstName: "Muhammad",
+//   lastName: "Raza",
+//   age: "24",
+//   class: "3",
+//   city: "Islamabad",
+// };
+//   students.unshift(student1);
+//   students.push(student2);
+  const handleSubmit=(event: PointerEvent)=>{
       event.preventDefault();
-    const student = {
-      id: idi,
-      firstName: firstNamei,
-      lastName: lastNamei,
-      age: agei,
-      class: classNamei,
-      city: cityi,
-    };
-    console.log(students);
-    console.log(students.length)
-    students.push(student);
-    console.log(student);
-    console.log(students.length);
-    setStudents(students);
+      addStudent();
+    console.log("after", students);
+
+    
+    setAge("");
+    setCity("");
+    setClassName("");
+    setFirstName("");
+    setLastName("");
+  
   }
+
+  const addStudent = () => {
+      const student = {
+        id: (students.length)+1,
+        firstName: firstNamei,
+        lastName: lastNamei,
+        age: agei,
+        class: classNamei,
+        city: cityi,
+      };
+    setStudents([...students, student]); // Append new data
+}
+// const fetchData=(id: string)=>{
+//   students.filter(student => student.id==id);
+//   console.log(students);
+//   // return students;
+//   console.log("id", id);  
+// }
   // function getData(): any {
   //   const fname = this.form.controls["Name"].value;
   //   const lname = document.getElementById("formGroupLastName");
@@ -99,23 +114,23 @@ const student2 = {
       <Form onSubmit={handleSubmit}>
         <Form.Group className="mb-3" controlId="formGroupFirstName" >
           <Form.Label>First Name</Form.Label>
-          <Form.Control type="text" placeholder="Enter first name" value={firstNamei} onChange= {(e)=> setFirstName(e.target.value)}/>
+          <Form.Control type="text" required placeholder="Enter first name" value={firstNamei}  onChange= {(e)=> setFirstName(e.target.value)}/>
         </Form.Group>
         <Form.Group className="mb-3" controlId="formGroupLastName">
           <Form.Label>Last Name</Form.Label>
-          <Form.Control type="text" placeholder="Enter last name" value={lastNamei} onChange={(e)=>{setLastName(e.target.value)}}/>
+          <Form.Control type="text" required placeholder="Enter last name" value={lastNamei} onChange={(e)=>{setLastName(e.target.value)}}/>
         </Form.Group>
         <Form.Group className="mb-3" controlId="formAge" >
           <Form.Label>Age</Form.Label>
-          <Form.Control type="text" placeholder="Enter age" value={agei} onChange={(e)=>{setAge(e.target.value)}}/>
+          <Form.Control type="text" required placeholder="Enter age" value={agei} onChange={(e)=>{setAge(e.target.value)}}/>
         </Form.Group>
         <Form.Group className="mb-3" controlId="formGroupClass" >
           <Form.Label>Class</Form.Label>
-          <Form.Control type="text" placeholder="Enter class" value={classNamei} onChange={(e)=>{setClassName(e.target.value)}} />
+          <Form.Control type="text" required placeholder="Enter class" value={classNamei} onChange={(e)=>{setClassName(e.target.value)}} />
         </Form.Group>
         <Form.Group className="mb-3" controlId="formGroupCity">
           <Form.Label>City</Form.Label>
-          <Form.Control type="text" placeholder="Enter city" value={cityi} onChange={(e)=>{setCity(e.target.value)}} />
+          <Form.Control type="text"  required placeholder="Enter city" value={cityi} onChange={(e)=>{setCity(e.target.value)}} />
         </Form.Group>
         <Row className="mb-2">
           <Button variant="primary" type="submit">
@@ -136,7 +151,8 @@ const student2 = {
         </thead>
         <tbody>
           {students.map((student) => (
-            <tr>
+            // <tr key={student.id} onClick={fetchData(student.id)}>
+              <tr>
               <td>{student.id}</td>
               <td>{student.firstName}</td>
               <td>{student.lastName}</td>
