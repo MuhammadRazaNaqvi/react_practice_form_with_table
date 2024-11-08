@@ -55,7 +55,7 @@ function FormGroupExample() {
 // };
 //   students.unshift(student1);
 //   students.push(student2);
-  const handleSubmit=(event: PointerEvent)=>{
+  const handleSubmit=(event: React.FormEvent)=>{
       event.preventDefault();
       addStudent();
     console.log("after", students);
